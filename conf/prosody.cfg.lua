@@ -139,3 +139,6 @@ Component "lobby.__DOMAIN__" "muc"
         "muc_rate_limit";
         "polls";
     }
+
+Component "endconference.__DOMAIN__" "end_conference"
+    muc_component = "muc.__DOMAIN"
