@@ -77,13 +77,26 @@ ram.runtime = "50M"
     extract = false
     rename = "jitsi-meet-prosody.deb"
 
-    [resources.sources.mod_auth_ldap]
-    url = "https://hg.prosody.im/prosody-modules/raw-file/tip/mod_auth_ldap/mod_auth_ldap.lua"
-    sha256 = "49c67ec86ec75ac8de93803be2ac7f907d1e9d3d22cd4c88fd48aaeed7a411e3"
-    format = "whatever"
+    [resources.sources.mod_lobby_autostart]
+    url = "https://raw.githubusercontent.com/jitsi-contrib/prosody-plugins/main/lobby_autostart/mod_lobby_autostart.lua"
+    sha256 = "cc410e3d0e3cd8e43f8a7c5ad663fd86edd1084584e4ead3dac4ea3151c84c8d"
+    format = "lua"
     extract = false
-    rename = "mod_auth_ldap.lua"
+    rename = "mod_lobby_autostart.lua"
 
+    #[resources.sources.mod_lobby_autostart_on_owner]
+    #url = "https://raw.githubusercontent.com/jitsi-contrib/prosody-plugins/main/lobby_autostart_on_owner/mod_lobby_autostart_on_owner.lua"
+    #sha256 = ""
+    #format = "lua"
+    #extract = false
+    #rename = "mod_lobby_autostart_on_owner.lua"
+
+    [resources.sources.secure_domain_lobby_bypass]
+    url = "https://raw.githubusercontent.com/jitsi-contrib/prosody-plugins/main/secure_domain_lobby_bypass/mod_secure_domain_lobby_bypass.lua"
+    sha256 = "b6e66dea6542e900484cd152eed2bc28c1864b8f648e5bc84bd64b770b1f7e7e"
+    format = "lua"
+    extract = false
+    rename = "mod_secure_domain_lobby_bypass.lua"
 
     [resources.system_user]
 

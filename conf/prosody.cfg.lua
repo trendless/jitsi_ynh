@@ -59,6 +59,7 @@ VirtualHost "__DOMAIN__"
         "muc_lobby_rooms";
         "muc_breakout_rooms";
         "av_moderation";
+        "persistent_lobby";
     }
     c2s_require_encryption = false
     lobby_muc = "lobby.__DOMAIN__"
@@ -79,6 +80,8 @@ Component "conference.__DOMAIN__" "muc"
         "polls";
         --"token_verification";
         "muc_rate_limit";
+        "lobby_autostart";
+        "secure_domain_lobby_bypass";
     }
     admins = { "__FOCUS_USER__@auth.__DOMAIN__" }
     muc_room_locking = false
@@ -139,3 +142,6 @@ Component "lobby.__DOMAIN__" "muc"
         "muc_rate_limit";
         "polls";
     }
+
+Component "endconference.__DOMAIN__" "end_conference"
+    muc_component = "muc.__DOMAIN"

@@ -589,7 +589,7 @@ var config = {
     // defaultLocalDisplayName: 'me',
 
     // Default remote name to be displayed
-    // defaultRemoteDisplayName: 'Fellow Jitster',
+    defaultRemoteDisplayName: 'Fellow Jitster',
 
     // Hides the display name from the participant thumbnail
     // hideDisplayName: false,
@@ -1003,7 +1003,12 @@ var config = {
     // - 'RECORDING_OFF_SOUND'
     // - 'RECORDING_ON_SOUND'
     // - 'TALK_WHILE_MUTED_SOUND'
-    // disabledSounds: [],
+    disabledSounds: [
+        'INCOMING_MSG_SOUND',
+        'PARTICIPANT_JOINED_SOUND',
+        'RAISE_HAND_SOUND',
+        'REACTION_SOUND'
+    ],
 
     // DEPRECATED! Use `disabledSounds` instead.
     // Decides whether the start/stop recording audio notifications should play on record.

@@ -8,15 +8,21 @@ services = ["__APP__-jicofo","__APP__-videobridge"]
     name = "Global configurations"
 
         [main.config.max_memory]
-        ask.en = "Max memory to use for VM"
+        ask.en = "Max memory to use for VM (in MiB)"
         type = "number"
-        help = "One user consume about 1,5 Mib memory ,with no user jitsi consume 120 MiB. For example if plan to have max 50 simultaneous users this parameter should be set to 200 mb"
+        help = "Jitsi itself consumes 120MiB of memory and each conference participant consumes an additional 1.5MiB. For example, to support 50 simultaneous users Max memory should be set to 200"
 
         [main.config.startaudioonly]
         ask.en = "Start in audio only mode"
         bind = "startAudioOnly:/etc/__APP__/meet/__DOMAIN__-config.js"
         type = "boolean"
-        help = "Start the conference in audio only mode (no video is being received nor sent)."
+        help = "Start the conference in audio-only mode (cameras off)."
+
+        [main.config.defaultremotedisplayname]
+        ask.en = "Set default remote display name for participants"
+        bind = "defaultRemoteDisplayName:/etc/__APP__/meet/__DOMAIN__-config.js"
+        type = "string"
+        help = "The name newly-joined participants will be assigned; eg, Fellow Jitser"
     
     [main.recording]
     name = "Recording"
@@ -24,13 +30,13 @@ services = ["__APP__-jicofo","__APP__-videobridge"]
         ask.en = "Disable local recording"
         bind = "localRecording>disable:/etc/__APP__/meet/__DOMAIN__-config.js"
         type = "boolean"
-        help = "Forbid any user to record the meeting to local storage."
+        help = "Prevent users from recording the meeting to their local storage"
         
         [main.recording.localrecording_disableselfrecording]
         ask.en = "Disable self recording"
         bind = "localRecording>disableSelfRecording:/etc/__APP__/meet/__DOMAIN__-config.js"
         type = "boolean"
-        help = ""
+        help = "Prevent users from recording their own video stream to their local storage"
         
     [main.p2p]
     name = "P2P mode"
@@ -38,7 +44,7 @@ services = ["__APP__-jicofo","__APP__-videobridge"]
         ask.en = "Enable P2P mode"
         bind = "p2p>enabled:/etc/__APP__/meet/__DOMAIN__-config.js"
         type = "boolean"
-        help = "When enabled the system will try to establish a direct connection when there are exactly 2 participants in the room."
+        help = "When enabled, the system will try to establish a direct connection when there are exactly 2 participants in the room."
 
         [main.p2p.p2p_stunservers]
         ask.en = "STUN servers"
@@ -85,7 +91,7 @@ services = ["__APP__-jicofo","__APP__-videobridge"]
         [main.whiteboard.whiteboard_userlimit]
         ask.en = "User limit"
         bind = "whiteboard>userLimit:/etc/__APP__/meet/__DOMAIN__-config.js"
-        help = "The user access limit to the whiteboard, introduced as a means to control the performance."
+        help = "The user access limit to the whiteboard; to ensure adequate performance."
         type = "number"
         min = 2
         
