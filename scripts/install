@@ -26,7 +26,7 @@ turn_secret=$(ynh_string_random --length=8)
 ynh_app_setting_set --key=focus_secret --value="$focus_secret"
 ynh_app_setting_set --key=turn_secret --value="$turn_secret"
 
-max_memory=200 #125 mib with no user +1,5*50 users=75 mib
+max_memory=2048 #125 mib with no user +1,5*50 users=75 mib
 ynh_app_setting_set --key=max_memory --value="$max_memory"
 
 muc_nickname=$(uuidgen)
@@ -35,23 +35,23 @@ ynh_app_setting_set --key=muc_nickname --value="$muc_nickname"
 # Config panel
 startaudioonly="false"
 ynh_app_setting_set --key=startaudioonly --value="$startaudioonly"
-localrecording_disable="false"
+localrecording_disable="true"
 ynh_app_setting_set --key=localrecording_disable --value="$localrecording_disable"
-localrecording_disableselfrecording="false"
+localrecording_disableselfrecording="true"
 ynh_app_setting_set --key=localrecording_disableselfrecording --value="$localrecording_disableselfrecording"
 p2p_enabled="true"
 ynh_app_setting_set --key=p2p_enabled --value="$p2p_enabled"
-p2p_stunservers="stun:meet-jit-si-turnrelay.jitsi.net:443"
+p2p_stunservers="stun:turn.$domain:5349"
 ynh_app_setting_set --key=p2p_stunservers --value="$p2p_stunservers"
 etherpad_base=""
 ynh_app_setting_set --key=etherpad_base --value="$etherpad_base"
 etherpad_openshareddocumentonjoin="false"
 ynh_app_setting_set --key=etherpad_openshareddocumentonjoin --value="$etherpad_openshareddocumentonjoin"
-whiteboard_enabled="false"
+whiteboard_enabled="true"
 ynh_app_setting_set --key=whiteboard_enabled --value="$whiteboard_enabled"
-whiteboard_collabserverbaseurl=""
+whiteboard_collabserverbaseurl="https://draw.$domain"
 ynh_app_setting_set --key=whiteboard_collabserverbaseurl --value="$whiteboard_collabserverbaseurl"
-whiteboard_userlimit=25
+whiteboard_userlimit=16
 ynh_app_setting_set --key=whiteboard_userlimit --value="$whiteboard_userlimit"
 
 
