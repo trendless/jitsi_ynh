@@ -20,7 +20,7 @@ var config = {
         // focus: 'focus.__DOMAIN__',
 
         // XMPP MUC domain. FIXME: use XEP-0030 to discover it.
-        muc: 'conference.<!--# echo var="subdomain" default="" -->__DOMAIN__'
+        muc: 'conference.__DOMAIN__'
     },
 
     // BOSH URL. FIXME: use XEP-0156 to discover it.
@@ -1086,7 +1086,7 @@ var config = {
     // Mainly privacy related settings
 
     // Disables all invite functions from the app (share, invite, dial out...etc)
-    // disableInviteFunctions: true,
+    disableInviteFunctions: true,
 
     // Disables storing the room name to the recents list. When in an iframe this is ignored and
     // the room is never stored in the recents list.
@@ -1103,7 +1103,7 @@ var config = {
     // },
 
     // Options related to the remote participant menu.
-    // remoteVideoMenu: {
+    remoteVideoMenu: {
     //     // Whether the remote video context menu to be rendered or not.
     //     disabled: true,
     //     // If set to true the 'Kick out' button will be disabled.
@@ -1111,8 +1111,8 @@ var config = {
     //     // If set to true the 'Grant moderator' button will be disabled.
     //     disableGrantModerator: true,
     //     // If set to true the 'Send private message' button will be disabled.
-    //     disablePrivateChat: true,
-    // },
+        disablePrivateChat: true,
+    },
 
     // Endpoint that enables support for salesforce integration with in-meeting resource linking
     // This is required for:
@@ -1226,7 +1226,7 @@ var config = {
 
     // If true, the tiles will be displayed contained within the available space rather than enlarged to cover it,
     // with a 16:9 aspect ratio (old behaviour).
-    // disableTileEnlargement: true,
+    disableTileEnlargement: true,
 
     // Controls the visibility and behavior of the top header conference info labels.
     // If a label's id is not in any of the 2 arrays, it will not be visible at all on the header.
@@ -1496,6 +1496,7 @@ var config = {
         // https://github.com/jitsi/excalidraw-backend
         collabServerBaseUrl: '__WHITEBOARD_COLLABSERVERBASEURL__',
         userLimit: __WHITEBOARD_USERLIMIT__,
+        // limitUrl: 'https://example.com/blog/whiteboard-limits' // The url for more info about the whiteboard and its usage limitations.
     },
 };
 
