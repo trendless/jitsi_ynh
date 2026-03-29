@@ -7,7 +7,13 @@ external_service_secret = "__TURN_SECRET__";
 external_services = {
      { type = "stun", host = "__DOMAIN__", port = 3478 },
      { type = "turn", host = "__DOMAIN__", port = 3478, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
+     { type = "turn", host = "__DOMAIN__", port = 3478, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" }
+     { type = "turn", host = "__DOMAIN__", port = 3479, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
+     { type = "turn", host = "__DOMAIN__", port = 3479, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" }
+     { type = "turns", host = "__DOMAIN__", port = 5349, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
      { type = "turns", host = "__DOMAIN__", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" }
+     { type = "turns", host = "__DOMAIN__", port = 5350, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
+     { type = "turns", host = "__DOMAIN__", port = 5350, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" }
 };
 
 cross_domain_bosh = false;
@@ -59,6 +65,7 @@ VirtualHost "__DOMAIN__"
         "muc_lobby_rooms";
         "muc_breakout_rooms";
         "av_moderation";
+        "persistent_lobby";
     }
     c2s_require_encryption = false
     lobby_muc = "lobby.__DOMAIN__"
@@ -76,9 +83,10 @@ Component "conference.__DOMAIN__" "muc"
     modules_enabled = {
         "muc_meeting_id";
         "muc_domain_mapper";
-        "polls";
         --"token_verification";
         "muc_rate_limit";
+        "lobby_autostart";
+        "secure_domain_lobby_bypass";
     }
     admins = { "__FOCUS_USER__@auth.__DOMAIN__" }
     muc_room_locking = false
@@ -137,5 +145,7 @@ Component "lobby.__DOMAIN__" "muc"
     muc_room_default_public_jids = true
     modules_enabled = {
         "muc_rate_limit";
-        "polls";
     }
+
+Component "endconference.__DOMAIN__" "end_conference"
+    muc_component = "muc.__DOMAIN"
