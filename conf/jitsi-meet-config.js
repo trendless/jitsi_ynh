@@ -211,7 +211,7 @@ var config = {
 
     // How many participants while in the tile view mode, before the receiving video quality is reduced from HD to SD.
     // Use -1 to disable.
-    // maxFullResolutionParticipants: 2,
+    maxFullResolutionParticipants: -1,
 
     // w3c spec-compliant video constraints to use for video capture. Currently
     // used by browsers that return true from lib-jitsi-meet's
@@ -589,7 +589,7 @@ var config = {
     // defaultLocalDisplayName: 'me',
 
     // Default remote name to be displayed
-    defaultRemoteDisplayName: 'Fellow Jitster',
+    defaultRemoteDisplayName: '__DEFAULTREMOTEDISPLAYNAME__',
 
     // Hides the display name from the participant thumbnail
     // hideDisplayName: false,
