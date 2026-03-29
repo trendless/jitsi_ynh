@@ -7,13 +7,7 @@ external_service_secret = "__TURN_SECRET__";
 external_services = {
      { type = "stun", host = "__DOMAIN__", port = 3478 },
      { type = "turn", host = "__DOMAIN__", port = 3478, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
-     { type = "turn", host = "__DOMAIN__", port = 3478, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" }
-     { type = "turn", host = "__DOMAIN__", port = 3479, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
-     { type = "turn", host = "__DOMAIN__", port = 3479, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" }
-     { type = "turns", host = "__DOMAIN__", port = 5349, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
      { type = "turns", host = "__DOMAIN__", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" }
-     { type = "turns", host = "__DOMAIN__", port = 5350, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
-     { type = "turns", host = "__DOMAIN__", port = 5350, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" }
 };
 
 cross_domain_bosh = false;
