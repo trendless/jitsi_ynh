@@ -142,4 +142,8 @@ Component "lobby.__DOMAIN__" "muc"
     }
 
 Component "endconference.__DOMAIN__" "end_conference"
-    muc_component = "muc.__DOMAIN"
+    muc_component = "muc.__DOMAIN__"
+
+Component "metadata.__DOMAIN__" "room_metadata_component"
+    muc_component = "conference.__DOMAIN__"
+    breakout_rooms_component = "breakout.__DOMAIN__"
