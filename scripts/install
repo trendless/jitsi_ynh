@@ -33,6 +33,8 @@ muc_nickname=$(uuidgen)
 ynh_app_setting_set --key=muc_nickname --value="$muc_nickname"
 
 # Config panel
+defaultremotedisplayname="friend"
+ynh_app_setting_set --key=defaultremotedisplayname --value="$defaultremotedisplayname"
 startaudioonly="false"
 ynh_app_setting_set --key=startaudioonly --value="$startaudioonly"
 localrecording_disable="true"
