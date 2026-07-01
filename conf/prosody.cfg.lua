@@ -10,8 +10,13 @@ external_services = {
      { type = "turns", host = "__DOMAIN__", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" }
 };
 
+trusted_proxies = { "127.0.0.1", "::1" }
+
 cross_domain_bosh = false;
 consider_bosh_secure = true;
+consider_websocket_secure = true;
+cross_domain_websocket = true;
+
 -- https_ports = { }; -- Remove this line to prevent listening on port 5284
 
 -- https://ssl-config.mozilla.org/#server=haproxy&version=2.1&config=intermediate&openssl=1.1.0g&guideline=5.4
@@ -51,8 +56,9 @@ VirtualHost "__DOMAIN__"
     -- we need bosh
     modules_enabled = {
         "bosh";
+        "websocket";
         "pubsub";
-        "ping"; -- Enable mod_ping
+        "ping";
         "speakerstats";
         "external_services";
         "conference_duration";
@@ -60,6 +66,8 @@ VirtualHost "__DOMAIN__"
         "muc_breakout_rooms";
         "av_moderation";
         "persistent_lobby";
+        "room_metadata"; 
+        "jitsi_session";
     }
     c2s_require_encryption = false
     lobby_muc = "lobby.__DOMAIN__"
@@ -70,6 +78,11 @@ VirtualHost "__DOMAIN__"
 VirtualHost "guest.__DOMAIN__"
     authentication = "anonymous"
     c2s_require_encryption = false
+    modules_enabled = {
+        "room_metadata";
+        "jitsi_session";
+        "websocket";
+    }
 
 Component "conference.__DOMAIN__" "muc"
     restrict_room_creation = true
