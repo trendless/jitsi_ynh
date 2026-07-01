@@ -68,7 +68,7 @@ VirtualHost "__DOMAIN__"
         "bosh";
         "websocket";
         "smacks";
-	"pubsub";
+	    "pubsub";
         "ping";
         "external_services";
         "features_identity";
