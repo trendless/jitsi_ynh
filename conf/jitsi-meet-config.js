@@ -1494,7 +1494,7 @@ var config = {
         enabled: __WHITEBOARD_ENABLED__,
         // The server used to support whiteboard collaboration.
         // https://github.com/jitsi/excalidraw-backend
-        collabServerBaseUrl: '__WHITEBOARD_COLLABSERVERBASEURL__',
+        collabServerBaseUrl: 'https://__WHITEBOARD_COLLABSERVERBASEDOMAIN__',
         userLimit: __WHITEBOARD_USERLIMIT__,
         // limitUrl: 'https://example.com/blog/whiteboard-limits' // The url for more info about the whiteboard and its usage limitations.
     },
