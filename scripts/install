@@ -76,6 +76,9 @@ chmod 750 "$install_dir"
 chmod -R o-rwx "$install_dir"
 chown -R "$app:$app" "$install_dir"
 
+sed -i 's/require "prosody\.util\./require "util./g' "$install_dir/jitsi-meet-prosody/mod_speakerstats_component.lua"
+sed -i 's/require "prosody\.util\./require "util./g' "$install_dir/jitsi-meet-prosody/mod_room_metadata_component.lua"
+
 #=================================================
 # REPLACE JNIWRAPPER FOR ARMHF ARCHITECTURE IN JITSI-VIDEOBRIDGE
 #=================================================
