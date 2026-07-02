@@ -51,8 +51,8 @@ etherpad_openshareddocumentonjoin="false"
 ynh_app_setting_set --key=etherpad_openshareddocumentonjoin --value="$etherpad_openshareddocumentonjoin"
 whiteboard_enabled="true"
 ynh_app_setting_set --key=whiteboard_enabled --value="$whiteboard_enabled"
-whiteboard_collabserverbaseurl="https://draw.$domain"
-ynh_app_setting_set --key=whiteboard_collabserverbaseurl --value="$whiteboard_collabserverbaseurl"
+#whiteboard_collabserverbaseurl="https://draw.$domain"
+#ynh_app_setting_set --key=whiteboard_collabserverbaseurl --value="$whiteboard_collabserverbaseurl"
 whiteboard_userlimit=16
 ynh_app_setting_set --key=whiteboard_userlimit --value="$whiteboard_userlimit"
 
