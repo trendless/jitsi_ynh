@@ -39,6 +39,10 @@ ram.runtime = "50M"
     type = "group"
     default = "visitors"
 
+    [install.excalidraw_domain]
+    ask = "On which domain is Excalidraw-backend installed?"
+    type = "domain"
+
 [resources]
     [resources.sources]
     [resources.sources.jitsi-meet-web]

@@ -58,7 +58,7 @@ ynh_script_progression "Removing dependencies..."
 
 ynh_app_setting_delete --key=require_prosody
 
-ynh_remove_apps
+#ynh_remove_apps
 
 #=================================================
 # REMOVE VARIOUS FILES

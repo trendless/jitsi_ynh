@@ -51,7 +51,7 @@ etherpad_openshareddocumentonjoin="false"
 ynh_app_setting_set --key=etherpad_openshareddocumentonjoin --value="$etherpad_openshareddocumentonjoin"
 whiteboard_enabled="true"
 ynh_app_setting_set --key=whiteboard_enabled --value="$whiteboard_enabled"
-whiteboard_collabserverbaseurl="https://draw.$domain"
+whiteboard_collabserverbaseurl="https://$excalidraw_domain"
 ynh_app_setting_set --key=whiteboard_collabserverbaseurl --value="$whiteboard_collabserverbaseurl"
 whiteboard_userlimit=16
 ynh_app_setting_set --key=whiteboard_userlimit --value="$whiteboard_userlimit"
@@ -75,6 +75,9 @@ _setup_sources
 chmod 750 "$install_dir"
 chmod -R o-rwx "$install_dir"
 chown -R "$app:$app" "$install_dir"
+
+sed -i 's/require "prosody\.util\./require "util./g' "$install_dir/jitsi-meet-prosody/mod_speakerstats_component.lua"
+sed -i 's/require "prosody\.util\./require "util./g' "$install_dir/jitsi-meet-prosody/mod_room_metadata_component.lua"
 
 #=================================================
 # REPLACE JNIWRAPPER FOR ARMHF ARCHITECTURE IN JITSI-VIDEOBRIDGE
