@@ -117,7 +117,6 @@ Component "breakout.__DOMAIN__" "muc"
         "muc_meeting_id";
         "muc_domain_mapper";
         "muc_rate_limit";
-        "polls";
     }
     admins = { "__FOCUS_USER__@auth.__DOMAIN__" }
     muc_room_locking = false
