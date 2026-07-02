@@ -40,7 +40,7 @@ ram.runtime = "50M"
     default = "visitors"
 
     [install.excalidraw_domain]
-    ask = "On which domain is Excalidraw-backend installed?
+    ask = "On which domain is Excalidraw-backend installed?"
     type = "domain"
 
 [resources]
