@@ -145,7 +145,7 @@ VirtualHost "auth.__DOMAIN__"
     authentication = "internal_hashed"
     smacks_hibernation_time = 15;
 
-VirtualHost "recorder.jitmeet.example.com"
+VirtualHost "recorder.__DOMAIN__"
     modules_enabled = {
       "smacks";
     }
