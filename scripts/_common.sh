@@ -24,6 +24,11 @@ _setup_sources() {
         mv "$install_dir/temp/usr/share/${packages[$package]}/" "$install_dir/$package/"
         ynh_safe_rm "$install_dir/temp"
     done
+
+    ynh_setup_source --dest_dir="$install_dir/jitsi-meet-prosody" --source_id=mod_lobby_autostart
+    #ynh_setup_source --dest_dir="$install_dir/jitsi-meet-prosody" --source_id=mod_lobby_autostart_on_owner
+    ynh_setup_source --dest_dir="$install_dir/jitsi-meet-prosody" --source_id=secure_domain_lobby_bypass
+    ynh_replace --match="The meeting has been terminated" --replace="Wonderful to see you! Until next time <3" --file="$install_dir/jitsi-meet-prosody/mod_end_conference.lua"
 }
 
 ynh_jniwrapper_armhf () {

@@ -1,3 +1,6 @@
+-- We need this for prosody 13.0
+component_admins_as_room_owners = true
+
 plugin_paths = { "__INSTALL_DIR__/jitsi-meet-prosody/" }
 
 -- domain mapper options, must at least have domain base set to use the mapper
@@ -12,7 +15,18 @@ external_services = {
 
 cross_domain_bosh = false;
 consider_bosh_secure = true;
+consider_websocket_secure = true;
 -- https_ports = { }; -- Remove this line to prevent listening on port 5284
+
+-- by default prosody 0.12 sends cors headers, if you want to disable it uncomment the following (the config is available on 0.12.1)
+--http_cors_override = {
+--    bosh = {
+--        enabled = false;
+--    };
+--    websocket = {
+--        enabled = false;
+--    };
+--}
 
 -- https://ssl-config.mozilla.org/#server=haproxy&version=2.1&config=intermediate&openssl=1.1.0g&guideline=5.4
 ssl = {
@@ -25,8 +39,12 @@ unlimited_jids = {
     "__VIDEOBRIDGE_USER__@auth.__DOMAIN__"
 }
 
+-- https://prosody.im/doc/modules/mod_smacks
+smacks_max_unacked_stanzas = 5;
+smacks_hibernation_time = 60;
+smacks_max_old_sessions = 1;
+
 VirtualHost "__DOMAIN__"
-    -- enabled = false -- Remove this line to enable this host
     authentication = "ldap"
     ldap_server = "localhost"
     ldap_filter = "(uid=$user)"
@@ -45,20 +63,19 @@ VirtualHost "__DOMAIN__"
         key = "/etc/prosody/certs/__DOMAIN__.key";
         certificate = "/etc/prosody/certs/__DOMAIN__.crt";
     }
-    av_moderation_component = "avmoderation.__DOMAIN__"
-    speakerstats_component = "speakerstats.__DOMAIN__"
-    conference_duration_component = "conferenceduration.__DOMAIN__"
     -- we need bosh
     modules_enabled = {
         "bosh";
-        "pubsub";
-        "ping"; -- Enable mod_ping
-        "speakerstats";
+        "websocket";
+        "smacks";
+	    "pubsub";
+        "ping";
         "external_services";
+        "features_identity";
         "conference_duration";
         "muc_lobby_rooms";
         "muc_breakout_rooms";
-        "av_moderation";
+        "persistent_lobby";
     }
     c2s_require_encryption = false
     lobby_muc = "lobby.__DOMAIN__"
@@ -69,17 +86,26 @@ VirtualHost "__DOMAIN__"
 VirtualHost "guest.__DOMAIN__"
     authentication = "anonymous"
     c2s_require_encryption = false
-
+    modules_enabled = {
+        "websocket";
+    }
 Component "conference.__DOMAIN__" "muc"
     restrict_room_creation = true
     storage = "memory"
     modules_enabled = {
+        "muc_hide_all";
         "muc_meeting_id";
         "muc_domain_mapper";
         --"token_verification";
         "muc_rate_limit";
+        "muc_password_whitelist";
+        "lobby_autostart";
+        "secure_domain_lobby_bypass";
     }
     admins = { "__FOCUS_USER__@auth.__DOMAIN__" }
+    muc_password_whitelist = {
+        "__FOCUS_USER__@auth.__DOMAIN__"
+    }
     muc_room_locking = false
     muc_room_default_public_jids = true
 
@@ -87,9 +113,9 @@ Component "breakout.__DOMAIN__" "muc"
     restrict_room_creation = true
     storage = "memory"
     modules_enabled = {
+        "muc_hide_all";
         "muc_meeting_id";
         "muc_domain_mapper";
-        --"token_verification";
         "muc_rate_limit";
     }
     admins = { "__FOCUS_USER__@auth.__DOMAIN__" }
@@ -100,6 +126,7 @@ Component "breakout.__DOMAIN__" "muc"
 Component "internal.auth.__DOMAIN__" "muc"
     storage = "memory"
     modules_enabled = {
+        "muc_hide_all";
         "ping";
     }
     admins = { "__FOCUS_USER__@auth.__DOMAIN__", "__VIDEOBRIDGE_USER__@auth.__DOMAIN__" }
@@ -113,8 +140,17 @@ VirtualHost "auth.__DOMAIN__"
     }
     modules_enabled = {
         "limits_exception";
+        "smacks";
     }
     authentication = "internal_hashed"
+    smacks_hibernation_time = 15;
+
+VirtualHost "recorder.__DOMAIN__"
+    modules_enabled = {
+      "smacks";
+    }
+    authentication = "internal_hashed"
+    smacks_max_old_sessions = 2000;
 
 -- Proxy to jicofo's user JID, so that it doesn't have to register as a component.
 Component "focus.__DOMAIN__" "client_proxy"
@@ -123,10 +159,13 @@ Component "focus.__DOMAIN__" "client_proxy"
 Component "speakerstats.__DOMAIN__" "speakerstats_component"
     muc_component = "conference.__DOMAIN__"
 
-Component "conferenceduration.__DOMAIN__" "conference_duration_component"
+Component "endconference.__DOMAIN__" "end_conference"
     muc_component = "conference.__DOMAIN__"
 
 Component "avmoderation.__DOMAIN__" "av_moderation_component"
+    muc_component = "conference.__DOMAIN__"
+
+Component "filesharing.__DOMAIN__" "filesharing_component"
     muc_component = "conference.__DOMAIN__"
 
 Component "lobby.__DOMAIN__" "muc"
@@ -135,7 +174,12 @@ Component "lobby.__DOMAIN__" "muc"
     muc_room_locking = false
     muc_room_default_public_jids = true
     modules_enabled = {
+        "muc_hide_all";
         "muc_rate_limit";
     }
+
+Component "metadata.__DOMAIN__" "room_metadata_component"
+    muc_component = "conference.__DOMAIN__"
+    breakout_rooms_component = "breakout.__DOMAIN__"
 
 Component "polls.__DOMAIN__" "polls_component"
