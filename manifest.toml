@@ -7,7 +7,7 @@ name = "Jitsi Meet"
 description.en = "Video conferencing web application"
 description.fr = "Application web de conférence vidéo"
 
-version = "2.0.11031~ynh1"
+version = "2.0.11031~ynh2"
 
 maintainers = []
 
@@ -115,6 +115,8 @@ ram.runtime = "50M"
     videobridge.default = 10000
     videobridge.exposed = "UDP"
     component.default = 5347
+    jvb.default = 9090
+    jicofo.default = 8888
 
     [resources.apt]
     packages = [
