@@ -174,7 +174,7 @@ yunohost service add "$app-videobridge" --log "/var/log/$app/$app-videobridge.lo
 ynh_config_add_systemd --service="$app-jicofo" --template="jitsi-jicofo.service"
 yunohost service add "$app-jicofo" --log "/var/log/$app/$app-jicofo.log"
 
-yunohost service add "prosody" --log "/var/log/$app/$app.log"
+yunohost service add "prosody" --log "/var/log/prosody/prosody.log"
 
 ynh_config_add_logrotate
 
