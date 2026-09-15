@@ -28,7 +28,7 @@ _setup_sources() {
     ynh_setup_source --dest_dir="$install_dir/jitsi-meet-prosody" --source_id=mod_lobby_autostart
     #ynh_setup_source --dest_dir="$install_dir/jitsi-meet-prosody" --source_id=mod_lobby_autostart_on_owner
     ynh_setup_source --dest_dir="$install_dir/jitsi-meet-prosody" --source_id=secure_domain_lobby_bypass
-    ynh_replace --match="The meeting has been terminated" --replace="Wonderful to see you! Until next time <3" --file="$install_dir/jitsi-meet-prosody/mod_end_conference.lua"
+    ynh_replace --match="The meeting has been terminated" --replace="Call ended" --file="$install_dir/jitsi-meet-prosody/mod_end_conference.lua"
 }
 
 ynh_jniwrapper_armhf () {
