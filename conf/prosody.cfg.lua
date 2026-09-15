@@ -8,7 +8,7 @@ muc_mapper_domain_base = "__DOMAIN__";
 
 external_service_secret = "__TURN_SECRET__";
 external_services = {
-     { type = "stun", host = "__DOMAIN__", port = 3478 },
+     { type = "stun", host = "__DOMAIN__", port = 3478, transport = "udp" },
      { type = "turn", host = "__DOMAIN__", port = 3478, transport = "udp", secret = true, ttl = 86400, algorithm = "turn" },
      { type = "turns", host = "__DOMAIN__", port = 5349, transport = "tcp", secret = true, ttl = 86400, algorithm = "turn" }
 };
