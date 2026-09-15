@@ -73,6 +73,8 @@ systemctl enable "$app-jicofo.service" --quiet
 
 yunohost service add "$app-jicofo" --log "/var/log/$app/$app-jicofo.log"
 
+yunohost service add "prosody" --log "/var/log/prosody/prosody.log"
+
 ynh_restore "/etc/logrotate.d/$app"
 
 #=================================================
