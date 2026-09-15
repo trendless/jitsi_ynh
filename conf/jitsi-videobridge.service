@@ -11,7 +11,7 @@ Environment=LOGFILE=/var/log/__APP__/jitsi-videobridge.log
 User=__APP__
 RuntimeDirectory=jitsi-videobridge
 RuntimeDirectoryMode=0750
-PIDFile=/var/run/jitsi-videobridge/jitsi-videobridge.pid
+PIDFile=/run/jitsi-videobridge/jitsi-videobridge.pid
 # more threads for this process
 TasksMax=65000
 # allow more open files for this process
